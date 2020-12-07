@@ -1,11 +1,11 @@
 public class Jenga extends General{
-  
+  // Atributos de arreglos bidimensionales correspondientes a las cuatro vistas del jenga
   public int v1[][] =  new int[n][3];
   public int v2[][] =  new int[n][3];
   public int v3[][] =  new int[n][3];
   public int v4[][] =  new int[n][3];
   public int vista;
-  
+  //Método Constructor del Jenga (Asingación de valores estándares de la matriz)
   public Jenga(){
     for(int i=0;i<n;i++){
      for(int j=0;j<3;j++){  
@@ -27,15 +27,9 @@ public class Jenga extends General{
        }
      }
    } 
-   vista = 1;
-   
-  // v1[4][0]=0;
- //  v1[4][1]=0;
- //  v2[4][0]=0;
- //  v2[4][1]=0;
-  
+   vista = 1;  
   }
-  
+  // Aparición de los bloques respecto a los valores de la matriz en la vista respectiva
  public void display(){
      switch(vista){
         case 1:
@@ -125,6 +119,7 @@ public class Jenga extends General{
      }
      
   }
+  // Método para ubicación de nuevas fichas (INCOMPLETO)
   public void ubicar(){
     if(pox==0){
           pos0=true;
@@ -286,23 +281,25 @@ public class Jenga extends General{
         
     
   }
+  // Verificación y búsqueda de excepciones en la física de la torre para determinar el fin del juego
   public void derrota(){
     for(int i=1;i<n;i++){
       for(int j=0;j<3;j++){
          if(v1[i][0]<1 && v1[i][1]<1 && v1[i][2]<1 && v1[i-1][j]>1){
-            cont=true;
-            last=true;
+            cont=true; // Contador de 4 segundos
+            last=true; // Booleano para iniciar el proceso de fin del juego
                         
          }
          if(v1[i][0]<1 && v1[i][1]<1 && v1[i-1][j]>1 ||v1[i][1]<1 && v1[i][2]<1 && v1[i-1][j]>1){
-            cont=true;
-            last=true;
+            cont=true; // Contador de 4 segundos
+            last=true; // Booleano para iniciar el proceso de fin de juego
             
          }
       }
     }
   }
-  
+  /*Método para la actualización respectiva de las 4 vistas de la matriz luego de un impacto o modificación 
+  de un valor en la misma (parámetro de fila, columna y valor a restar en el componente)*/
   public void conexion(int _i,int _j,int _dano){
        if(vista==1 && v1[_i][_j]>0){
          v1[_i][_j]=v1[_i][_j]-_dano;
@@ -495,7 +492,7 @@ public class Jenga extends General{
           }
        }
   }
-  
+  //  Metodo para verificación de fichas verticales u horizontales dependiendo sus componentes (3||9)
   public void consulta(int _j){
     if(vista==1 && i%2==0){
         if(v2[i][0]<=3 && v2[i][0]>0){
