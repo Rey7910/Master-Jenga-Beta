@@ -3,18 +3,18 @@ public class Arma extends General{
     public int turno; //Variable que determina el arma correspondiente y por ende, el valor de la precision y daño
     public int precision;
     public int dano;
-   //Llamada del metodo abstracto para su uso de polimorfismo
-    public Arma(int _turno){
+   
+    public Arma(int _turno){// el constructor recibe una valor entero, el cual elige que mira se va a utilizar
        turno=_turno;
-       if(turno==1){
+       if(turno==1){//mira 1 con precision alta
           d=30;
           a=30;
           dano=3;
-       }else if(turno==2){
+       }else if(turno==2){//mira 2 con precision media
          d=100;
          a=100;
          dano = 3;
-       }else if(turno==3){
+       }else if(turno==3){// mira 3 con precision baja
          d=150;
          a=150;
          dano=5;
@@ -29,17 +29,17 @@ public class Arma extends General{
     }
   //Metodos locales 
    public void mover(){      //Movimiento de la mira en termino de la posición del mouse en los ejes de coordenadas
-       x = mouseX-(d/2);
-       y = mouseY-(a/2);
+       x = mouseX-(d/2);//coordenadas del mouse en el eje x
+       y = mouseY-(a/2);// coordenadas del mouse en el eje y
    }
-   public void disparo(){
-      float impactoX = x+random(d);
-      float impactoY = y+random(a);
+   public void disparo(){     //metodo para realizar el impacto y la eiminacion de los bloques del Jenga
+      float impactoX = x+random(d);//valores aleatorios en el 
+      float impactoY = y+random(a);//  rango de las respectivas miras. Para identificar los valores de dispersión
       
-     int _j=30;
+     int _j=30;  // son 30 ya que son 30 piezas en el Jenga
       if(impactoX>=pos && impactoX<=pos+(lan*3) && impactoY>=30 && impactoY <=30+(len*n)){
               
-              if(impactoX>=pos && impactoX<pos+lan){
+              if(impactoX>=pos && impactoX<pos+lan){//columnas
                  _j=0;
                }else if(impactoX>=pos+lan && impactoX<pos+(lan*2)){
                  _j=1;
@@ -47,7 +47,7 @@ public class Arma extends General{
                  _j=2;
                }
                
-               if(impactoY>=30 && impactoY<30+len){
+               if(impactoY>=30 && impactoY<30+len){//filas
                  i=0;
                }else if(impactoY>=30+len && impactoY<30+(len*2)){
                  i=1;
@@ -68,7 +68,7 @@ public class Arma extends General{
                }else if(impactoY>=30+len && impactoY<30+(len*10)){
                  i=9;
                }
-               jenga.consulta(_j);
+               jenga.consulta(_j);// se hace la consulta en las matrices
                if(i>=4 && i<=10){
                    puntaje+=20;
                }
@@ -121,7 +121,7 @@ println("---------------------");
          i=30;
          j=30;
       }
-      fill(255,0,255);
+      fill(255,0,255);// se muestra la explosión a la hora del impacto
       image(explosion,impactoX-50,impactoY-50,100,100);
       if(!ale && !ubi){   
           disparos+=5;
